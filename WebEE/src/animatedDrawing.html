@@ -1,0 +1,96 @@
+<head>
+    <style>
+        .path {
+            /*animation: FillIn 5s ease-in-out forwards 1;*/
+            stroke-width: 10;
+            stroke-miterlimit:10;
+        }
+        @keyframes FillIn {
+            from { fill-opacity: 0; }
+            to { fill-opacity: 1; }
+        }
+        /*@keyframes dash {*/
+            /*from {*/
+                /*stroke-dashoffset: 100000;*/
+            /*}*/
+            /*to {*/
+                /*stroke-dashoffset: 0;*/
+            /*}*/
+        /*}*/
+        body {
+            background: url("../linen.jpg")
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url : "../atomicRobo.svg",
+                dataType: "text",
+                success : function (data) {
+                    xmlDoc = $.parseXML(data),
+                        $xml = $(xmlDoc);
+                        svg = $xml.find('svg');
+                        height = $(svg).attr('height');
+                        width = $(svg).attr('width');
+                        viewbox = $(svg).attr('viewBox');
+
+                        $('#svgRender').attr('height',height).attr('width',width).attr('viewBox',viewbox);
+                        g = $xml.find('g');
+
+//                        $(g).removeAttr('fill').removeAttr('stroke');
+                        $(g).attr('fill','none').attr('stroke','none');
+                    $('#svgRender').append(g);
+
+                        xmldata = $(g).find('path');
+
+                        $(xmldata).each(function () {
+                            $(this).addClass('path');
+                            $(this).attr('stroke','#000000');
+
+
+                            var length = this.getTotalLength();
+                            // Clear any previous transition
+                            this.style.transition = this.style.WebkitTransition =
+                                'none';
+                            // Set up the starting positions
+                            this.style.strokeDasharray = length + ' ' + length;
+                            this.style.strokeDashoffset = length;
+                            // Trigger a layout so styles are calculated & the browser
+                            // picks up the starting position before animating
+                            this.getBoundingClientRect();
+                            // Define our transition
+                            this.style.transition = this.style.WebkitTransition =
+                                'stroke-dashoffset 10s ease-in-out';
+                            $(this).attr('fill','url(#lightGradient)');
+                            // Go!
+                            this.style.strokeDashoffset = '0';
+
+                        });
+                }
+            });
+
+        });
+    </script>
+</head>
+<body>
+<svg id="svgRender" width="100%" version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve"><defs>
+    <radialGradient id="lightGradient" fy="90%">
+        <stop offset="100%" stop-color="black" stop-opacity="0">
+            <animate begin='5s' attributeName="offset" dur="5s" from="0" to="1" fill="freeze"    />
+            <animate begin='5s' attributeName="stop-opacity" dur="7s" from=".1" to=".5" fill="freeze"    />
+        </stop>
+        <stop offset="0%" stop-color="blue" stop-opacity="0">
+            <!--<animate begin='5s' attributeName="offset" dur="4s" from="1" to="0" fill="freeze"    />-->
+            <!--<animate begin='5s' attributeName="stop-opacity" dur="4s" from=".4" to=".8" fill="freeze"    />-->
+        </stop>
+
+    </radialGradient>
+
+
+</defs>
+</svg>
+
+
+</body>
