@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="javascript/handWrittenText.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Julee|Just+Me+Again+Down+Here|Princess+Sofia|Ruthie" rel="stylesheet">
+    <script src="javascript/misspell/misspell-dependencies.js"></script>
+    <script src="javascript/misspell/misspell.js"></script>
+</head>
+<body>
+<canvas width="630" id="canvas1"></canvas>
+<!--font-family: 'Julee', cursive;-->
+<!--font-family: 'Ruthie', cursive;-->
+<!--font-family: 'Princess Sofia', cursive;-->
+<!--font-family: 'Just Me Again Down Here', cursive;-->
+<script type="text/javascript">
+//    var misspelledText = misspell(text, capitalisation[, capsTypes, mispellPercent])
+    var misspelledText = misspell("I like to consider" +
+            "myself an intellectual.", false,1,70);
+    handWrittenText("canvas1",misspelledText ,({fontFamily: 'Julee'}));
+
+</script>
+</body>
+</html>
