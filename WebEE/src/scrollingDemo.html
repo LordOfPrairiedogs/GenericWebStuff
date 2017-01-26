@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="javascript/handWrittenText.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Julee|Just+Me+Again+Down+Here|Princess+Sofia|Ruthie"
+          rel="stylesheet">
+    <script src="javascript/jquery-scrollbox-master/jquery.scrollbox.js"></script>
+    <!--<link rel="stylesheet" href="javascript/jquery-scrollbox-master/demos/demo.css">-->
+    <style>
+        body {
+            padding-bottom: 100px;
+            background-image: url(http://wmh.github.io/circular-slides-generator/static/img/noise.png);
+        }
+        h1, h2, h3 {
+            padding-top: 20px;
+            font-family: 'Amaranth', sans-serif;
+        }
+        .scroll-text ul {
+            width: 800px;
+            height: 100px;
+            overflow: hidden;
+            margin: 0;
+        }
+        .scroll-text ul li {
+            height: 1.5em;
+        }
+        .scroll-img {
+            border: 1px solid red;
+            width: 680px;
+            height: 142px;
+            overflow: hidden;
+            font-size: 0;
+        }
+        .scroll-img ul {
+            width: 700px;
+            height: 600px;
+            margin: 0;
+            padding-left: 2px;
+        }
+        .scroll-img ul li {
+            display: inline-block;
+            margin: 2px 0 2px 2px;
+        }
+    </style>
+    <link rel="stylesheet" href="javascript/css/hand.css">
+</head>
+<body>
+
+<div id="demo3" class="scroll-img">
+<ul>
+   <li> <canvas width="700px" id="canvas1" class="scrolling"></canvas></li>
+   <li> <canvas width="700px" id="canvas2" class="scrolling"></canvas></li>
+    <li> <canvas width="700px" id="canvas3" class="scrolling"></canvas></li>
+    <li> <canvas width="700px" id="canvas4" class="scrolling"></canvas></li>
+    <li> <canvas width="700px" id="canvas5" class="scrolling"></canvas></li>
+    <li> <canvas width="700px" id="canvas6" class="scrolling"></canvas></li>
+</ul>
+</div>
+
+<!--font-family: 'Julee', cursive;-->
+<!--font-family: 'Ruthie', cursive;-->
+<!--font-family: 'Princess Sofia', cursive;-->
+<!--font-family: 'Just Me Again Down Here', cursive;-->
+<script type="text/javascript">
+    //    var misspelledText = misspell(text, capitalisation[, capsTypes, mispellPercent])
+    $(function() {
+
+        $('#demo3').scrollbox({
+            linear: true,
+            delay: 0,
+            speed: 60,
+            autoPlay: false,
+            onMouseOverPause: false
+        });
+        $('#demo3').mouseover (function () {
+            $('#demo3').trigger('forwardHover');
+        }).mouseout(function() {
+            $('#demo3').trigger('pauseHover');
+        });
+        $('.scrolling').click(function() {
+            $('#demo3').trigger('forward');
+        });
+        var sentence = "This is the first of many.";
+        var sentence2= "This is the second of many.";
+        handWrittenText("canvas1", sentence, ({fontFamily: 'Princess Sofia'}));
+        handWrittenText("canvas2", sentence2, ({fontFamily: 'Julee'}));
+        handWrittenText("canvas3", sentence, ({fontFamily: 'Just Me Again Down Here'}));
+        handWrittenText("canvas4", sentence2, ({fontFamily: 'Ruthie'}));
+        handWrittenText("canvas5", sentence2, ({fontFamily: 'Ruthie'}));
+
+
+    });
+</script>
+
+
+</body>
+</html>

@@ -199,6 +199,7 @@ const misspellDependencies = {
     "agriculture": "agricuture",
     "aggrieved": "agrieved",
     "have": "hvea",
+    "have": "has",
     "happen": "hapen",
     "aircraft": "airrcraft",
     "airport": "aiport",
